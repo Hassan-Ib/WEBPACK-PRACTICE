@@ -174,7 +174,7 @@
    ```javascript
     {
        test: /\.(svg|png|jpg|gif|webp)$/, // test
-       use: {
+       use: { // object instead of array
            loader: "file-loader",
            options: {
            name: "[name].[hash].[ext]", // hashing file name for caching
@@ -220,6 +220,37 @@
         {
             plugins :[new CleanWebpackPlugin()]
         }
+    ```
+
+### configuring webpack to spit out multiple bundle
+
+    incases where we want to seperate our own code from vendor\( boostrap and the likes\) code
+    this is done with entries
+    > we will import all the vendors in one file and import ours in another file
+    > we then go to our webpackfile
+    > we do this in common
+    > we then change output to
+
+    ```javascript
+    //common
+    {
+
+        entry : {
+            main : "./src/index.js",
+            vendor : "./src/vendor.js"
+        }
+        // output
+            //if  dev =>
+        output : {
+            filename : "[name].bundle.js"
+            path : path.resolve(__dirname, "dist")
+        }
+            //if  prod =>
+        output : {
+            filename : "[name].[contentHash].bundle.js"
+            path : path.resolve(__dirname, "dist)
+        }
+    }
     ```
 
 ## common config \[webpack.common.js\]

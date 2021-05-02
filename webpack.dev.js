@@ -5,6 +5,7 @@ const merge = require("webpack-merge");
 module.exports = merge(common, {
   mode: "development",
   output: {
+    // if we want multiple outputfile we use [name].bundle.js
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
   },
