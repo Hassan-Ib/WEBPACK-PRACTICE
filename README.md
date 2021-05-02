@@ -30,3 +30,8 @@
 ## Configuration
 
 webpack comes with default configuration, to work with this default configuration your folder needs to follow a structure of "./scr/index.js", webpack will spit out a dist folder with bundled js files
+
+### configfiles
+
+> we always have at least to config file one for development and one for production
+> to config webpack we will create a file "webpack.config.js" in the root folder

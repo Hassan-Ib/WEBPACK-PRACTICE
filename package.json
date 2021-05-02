@@ -8,6 +8,6 @@
     "webpack-cli": "^4.6.0"
   },
   "scripts": {
-    "start": "webpack"
+    "start": "webpack --config webpack.config.js"
   }
 }
