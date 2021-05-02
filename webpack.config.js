@@ -16,11 +16,14 @@ module.exports = {
   // 2 : path: path.resolve(__dirname,"folderName")} path to put the output
   output: {
     filename: "main.[contentHash]js", // name of file to spit out
+    //contentHash : anytime anything change in our js file a new unique file is created
+    // how to clean up the old ones --
     path: path.resolve(__dirname, "dist"), // path to spit the out and folder name, path needs to imported
   },
   //plugins
   plugins: [
     new HtmlWebpackPlugin({
+      // this creates a new html file with contentHash js in the script tag
       template: "./src/template.html", // html template with no script and css
     }),
   ],
