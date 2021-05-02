@@ -13,4 +13,17 @@ module.exports = {
     filename: "main.js", // name of file to spit out
     path: path.resolve(__dirname, "dist"), // path to spit the out and folder name, path needs to imported
   },
+  //loaders [cssLoader, girLoader, sassLoader, ...]
+  // module is where the array of rules of implementing loaders are
+  module: {
+    rules: [
+      //style-loader and css-loaders // [yarn add style-loader css-loader]
+      // css-loader turns css to valid javasript code
+      // style-loader injects style tag with the css code to the DOM
+      {
+        test: /\.css$/, // test : look for any file with .css at the end of it
+        use: ["style-loader", "css-loader"], // use : use the array of loaders for files that pass the test [style-loader, css-loader] most be in this order
+      },
+    ],
+  },
 };
