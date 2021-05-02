@@ -17,12 +17,29 @@ module.exports = {
   // module is where the array of rules of implementing loaders are
   module: {
     rules: [
+      //css rules
       //style-loader and css-loaders // [yarn add style-loader css-loader]
       // css-loader turns css to valid javasript code
       // style-loader injects style tag with the css code to the DOM
       {
         test: /\.css$/, // test : look for any file with .css at the end of it
-        use: ["style-loader", "css-loader"], // use : use the array of loaders for files that pass the test [style-loader, css-loader] most be in this order
+        // use : use the array of loaders for files that pass the test [style-loader, css-loader]
+        // most be in this order
+        use: ["style-loader", "css-loader"],
+      },
+      // sass-rules / sass-loader
+      // dependecies [style-loader, css-loader, sass-loader, node-sass] [yarn add style-loader css-loader sass-loader node-sass]
+      // sass-loader depends on node-sass to be installed to work , it turns scss /\.scss$/ files to css file
+      // css-loader turns css file to javaScript code (string)
+      // style-loader inject the code to the DOM
+
+      {
+        test: /\.scss$/, // Looks for all files that ends with .scss / .sass
+        use: [
+          "style-loader", //3: Inject styles into DOM
+          "css-loader", //2: Turns css into commonjs
+          "sass-loader", //1: Turns sass/scss files to css
+        ],
       },
     ],
   },
