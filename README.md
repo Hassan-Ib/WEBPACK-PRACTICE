@@ -253,6 +253,55 @@
     }
     ```
 
+#### extracting css yarn mini-css-extract-plugin
+
+    > use in prod
+    > yarn add mini-css-extract-plugin
+    > its required in prod
+    > its added as a plugin [new M]
+
+    ```javascript
+        const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+        //usage  to extract css file from javascript to a seperate css file
+        //1. as plugin
+        plugins :[new MiniCssExtractPlugin({
+            filename : "[name].[contentHash].css"
+        })]
+        //2. as loader its used instead of style-loader to inject it into html
+        module :{
+            rules :[
+                {
+                    test : /\.css$/,
+                    use :[
+                        MiniCssExtractPlugin.loader,
+                        "css-loader",
+                        // incase of sass user
+                        "sass-loader"
+                    ]
+                }
+            ]
+        }
+    ```
+
+#### minimize css-- optimize-css-assets-webpack-plugin
+
+    To minimize Extracted css file
+    > yarn add optimize-css-assets-webpack-plugin
+    > done in production
+    > we don't use it directly in plugin we use it in optimization.minimizer
+
+    ```javascript
+        const OptimizeCssAssetsPlugin = require("optimize-css-assets-plugin");
+        //usage
+        {
+            optimization : {
+                minimizer : [
+                    new OptimizeCssAssetsPlugin()
+                ]
+            }
+        }
+    ```
+
 ## common config \[webpack.common.js\]
 
 ## development congig \[webpack.dev.js\]
