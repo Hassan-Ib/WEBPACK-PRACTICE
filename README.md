@@ -302,10 +302,14 @@
         }
     ```
 
-## common config \[webpack.common.js\]
+### minimize js file terser-webpack-plugin
 
-## development congig \[webpack.dev.js\]
+### minimize html file html-webpack-plugin { minimize : {...}}
 
-## production config \[webpack.prod.js\]
+## common config [webpack.common.js]("./webpack.common.js")
+
+## development congig [webpack.dev.js]("./webpack.dev.js")
+
+## production config [webpack.prod.js]("./webpack.prod.js")
 
 ## Merging config
