@@ -1,4 +1,9 @@
 const path = require("path");
+// html-webpack-plugin / to solve adding contentHashed js file to html automatically
+//1: install [yarn add html-webpack-plugin]
+// import the plugin with commonjs
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 module.exports = {
   //mode : array of values [development, production] tell webpack if to minify or not
   mode: "development",
@@ -10,9 +15,15 @@ module.exports = {
   // 1 : filename : "filename.js", output fileName
   // 2 : path: path.resolve(__dirname,"folderName")} path to put the output
   output: {
-    filename: "main.js", // name of file to spit out
+    filename: "main.[contentHash]js", // name of file to spit out
     path: path.resolve(__dirname, "dist"), // path to spit the out and folder name, path needs to imported
   },
+  //plugins
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/template.html", // html template with no script and css
+    }),
+  ],
   //loaders [cssLoader, girLoader, sassLoader, ...]
   // module is where the array of rules of implementing loaders are
   module: {
@@ -44,3 +55,5 @@ module.exports = {
     ],
   },
 };
+//caching busting
+// to make caching unique for the browser
