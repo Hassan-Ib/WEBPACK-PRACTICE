@@ -60,3 +60,4 @@ module.exports = {
 };
 //caching busting
 // to make caching unique for the browser
+// working with images
