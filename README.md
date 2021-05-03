@@ -34,7 +34,7 @@
 ## configfiles
 
     > we always have at least two config file one for development and one for production
-    > to config webpack we will create a file "webpack.\[configname\].js" in the root folder in the folder we have
+    > to config webpack we will create a file "webpack.[configname].js" in the root folder in the folder we have
 
 ```javascript
 module.exports = {
