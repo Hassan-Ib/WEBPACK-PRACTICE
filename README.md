@@ -342,3 +342,5 @@ module.exports = merge(commonWebpack, {
   //... config
 });
 ```
+
+## package.json config [package.json config](package.json)
