@@ -332,13 +332,13 @@ module.exports = {
     > yarn add webpack-merge
 
 ```javascript
-    // require webpack-merge
-    const merge = require("webpack-merger");
-    // require the webpack file we want to merge
-    const commomWebpack = require("webpack.common.js");
+// require webpack-merge
+const merge = require("webpack-merger");
+// require the webpack file we want to merge
+const commomWebpack = require("webpack.common.js");
 
-    // usage
-    module.exports = merge(commonWebpack{
-        //... config
-    })
+// usage
+module.exports = merge(commonWebpack, {
+  //... config
+});
 ```
