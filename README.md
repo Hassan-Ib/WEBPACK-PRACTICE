@@ -1,6 +1,6 @@
 # Webpack installation and Config :octocat:
 
-## installation \[as developer dependecies\]:rocket:
+## installation \[as developer dependecies\] :rocket:
 
     > initiating node pageage manager \[npm or yarn\]
     > yarn init -y / npm init -y
@@ -48,7 +48,7 @@ module.exports = {
 
 ### MODE
 
-    mode : \(string\) can either be development or production
+    mode : (string) can either be development or production
     1. development mode :
 
 ```Javascript
@@ -95,8 +95,8 @@ module.exports = {
 
     Hashing is done for the purpose of unique caching, unique caching is neccessary because browser tends to cache file and decides if its neccessary to re download a file or not base on the filename, Hashing solve this problem by changing file name if anything changes in the file
     there are two types of hashing that i know of
-    1. \[contentHash\] is used for output.filename uniqueness e.g "main.\[contentHash\].js
-    2. \[hash\] is used for other file name e.g in module.rules for file loader filename use.name : "[name].[hash].[ext]"
+    1. [contentHash] is used for output.filename uniqueness e.g "main.[contentHash].js
+    2. [hash] is used for other file name e.g in module.rules for file loader filename use.name : "[name].[hash].[ext]"
 
 ### Loaders
 
@@ -134,19 +134,20 @@ module: {
    > yarn add style-loader css-loader sass-loader node-sass
    > configuration
 
-````javascript
-   module: {
-     rules: [
-       {
-         test: /\.scss$/,
-         use: [
-           "style-loader", //3. injects code to the DOM
-           "css-loader", //2. turn css file to commonjs code
-           "sass-loader", //1. turn sass file to css
-         ],
-       },
-     ];
-   }```
+```javascript
+module: {
+  rules: [
+    {
+      test: /\.scss$/,
+      use: [
+        "style-loader", //3. injects code to the DOM
+        "css-loader", //2. turn css file to commonjs code
+        "sass-loader", //1. turn sass file to css
+      ],
+    },
+  ];
+}
+```
 
 #### working with asset / images loaders
 
@@ -154,30 +155,40 @@ module: {
 
    > yarn add html-loader
    > add rule below to webpack module.rules
+
 ```javascript
    {
        test: /\.html$/,
        use: [
             "html-loader", // this will tell webpack to require any file use in the html
        ],
-   },```
+   },
+```
 
 2. we need file-loader
 
    > yarn add file-loader
    > add another rule to webpack module.rules
+
 ```javascript
-    {
-       test: /\.(svg|png|jpg|gif|webp)$/, // test
-       use: { // object instead of array
-           loader: "file-loader",
-           options: {
-           name: "[name].[hash].[ext]", // hashing file name for caching
-           outputPath: "imgs", // output folder
-           },
-       },
-    },
-````
+module.exports = {
+    module :{
+        rules = [
+            {
+                test: /\.(svg|png|jpg|gif|webp)$/, // test
+                use: { // object instead of array
+                    loader: "file-loader",
+                    options: {
+                        name: "[name].[hash].[ext]", // hashing file name for caching
+                        outputPath: "imgs", // output folder
+                    },
+                },
+            },
+        ]
+    }
+}
+
+```
 
 ### Plugins
 
@@ -194,7 +205,7 @@ module: {
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 //usage
-{
+module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "path to html template", // html template file without the script linked
@@ -214,8 +225,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 //usage
-{
-  plugins: [new CleanWebpackPlugin()];
+module.exports = {
+
+    plugins: [new CleanWebpackPlugin()];
 }
 ```
 
@@ -230,7 +242,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 ```javascript
     //common
-    {
+module.exports = {
 
         entry : {
             main : "./src/index.js",
@@ -247,7 +259,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
             filename : "[name].[contentHash].bundle.js"
             path : path.resolve(__dirname, "dist)
         }
-    }
+}
 ```
 
 #### extracting css yarn mini-css-extract-plugin
@@ -260,25 +272,28 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 ```javascript
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 //usage  to extract css file from javascript to a seperate css file
-//1. as plugin
-plugins: [
-  new MiniCssExtractPlugin({
-    filename: "[name].[contentHash].css",
-  }),
-];
-//2. as loader its used instead of style-loader to inject it into html
-module: {
-  rules: [
-    {
-      test: /\.css$/,
-      use: [
-        MiniCssExtractPlugin.loader,
-        "css-loader",
-        // incase of sass user
-        "sass-loader",
-      ],
-    },
-  ];
+module.exports = {
+    //1. as plugin
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: "[name].[contentHash].css",
+        }),
+    ];
+    //2. as loader its used instead of style-loader to inject it into html
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    // incase of sass user
+                    "sass-loader",
+                ],
+            },
+        ];
+    }
+
 }
 ```
 
@@ -292,10 +307,12 @@ module: {
 ```javascript
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-plugin");
 //usage
-{
+module.exports = {
+
   optimization: {
     minimizer: [new OptimizeCssAssetsPlugin()];
   }
+
 }
 ```
 
@@ -310,3 +327,18 @@ const OptimizeCssAssetsPlugin = require("optimize-css-assets-plugin");
 ## production config [webpack.prod.js]("./webpack.prod.js")
 
 ## Merging config
+
+    > install webpack-merge
+    > yarn add webpack-merge
+
+```javascript
+    // require webpack-merge
+    const merge = require("webpack-merger");
+    // require the webpack file we want to merge
+    const commomWebpack = require("webpack.common.js");
+
+    // usage
+    module.exports = merge(commonWebpack{
+        //... config
+    })
+```
