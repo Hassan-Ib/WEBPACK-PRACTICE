@@ -320,11 +320,11 @@ module.exports = {
 
 ### minimize html file html-webpack-plugin { minimize : {...}}
 
-## common config [webpack.common.js]("webpack.common.js")
+## common config [webpack.common.js](webpack.common.js)
 
-## development congig [webpack.dev.js]("webpack.dev.js")
+## development congig [webpack.dev.js](webpack.dev.js)
 
-## production config [webpack.prod.js]("webpack.prod.js")
+## production config [webpack.prod.js](webpack.prod.js)
 
 ## Merging config
 
