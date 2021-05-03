@@ -11,21 +11,21 @@
 
 ## Adding script to run webpack to package.json
 
-    ```json
-    {
-        "name": "webpack-Practice",
-        "version": "1.0.0",
-        "main": "index.js",
-        "license": "MIT",
-        "scripts": {
-            "start": "webpack"
-        },
-        "devDependencies": {
-            "webpack": "^5.36.2",
-            "webpack-cli": "^4.6.0"
-        }
-    }
-    ```
+```json
+{
+  "name": "webpack-Practice",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack"
+  },
+  "devDependencies": {
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.6.0"
+  }
+}
+```
 
 ## Configuration
 
@@ -36,11 +36,11 @@
     > we always have at least two config file one for development and one for production
     > to config webpack we will create a file "webpack.\[configname\].js" in the root folder in the folder we have
 
-    ```javascript
-        module.exports = {
-            //all config goes in here
-        };
-    ```
+```javascript
+module.exports = {
+  //all config goes in here
+};
+```
 
 ## CONFIGS
 
@@ -51,31 +51,32 @@
     mode : \(string\) can either be development or production
     1. development mode :
 
-    ```Javascript
+```Javascript
         mode : "development"
-    ```
+```
+
     2. production mode :
 
-    ```Javascript
+```Javascript
         mode : "production"
-    ```
+```
 
 ### Entry
 
     entry point is to specify where webpack is to start from "filepath/file"
     default of "./src/index.js"
 
-    ```Javascript
+```Javascript
         entry : "./src/index.js" // can be which ever path/file you want
-    ```
+```
 
 ### Devtool
 
     devtool is to specify what mode of file to be spit out, readable or not true / false
 
-    ```Javascript
+```Javascript
         devtool : true // false
-    ```
+```
 
 ### Output
 
@@ -83,14 +84,12 @@
     1. filename : name for the file to be spat out
     2. path : path to spat the file into
 
-
-
-    ```Javascript
+```Javascript
         output: {
             filename: "main.[contentHash]js",
             path: path.resolve(__dirname, "dist"), //path.resolve() is a node module that take directory name and new folder name and returns a new path
         }
-    ```
+```
 
 #### Hashing
 
@@ -112,20 +111,20 @@
    > we then add the rules for
    > note : loader rules are adde to module.rules
 
-   ```javascript
-   module: {
-     rules: [
-       {
-         test: /\.css$/,
-         use: [
-           // needs to be in this order
-           "style-loader",
-           "css-loader",
-         ],
-       },
-     ];
-   }
-   ```
+```javascript
+module: {
+  rules: [
+    {
+      test: /\.css$/,
+      use: [
+        // needs to be in this order
+        "style-loader",
+        "css-loader",
+      ],
+    },
+  ];
+}
+```
 
 2. working with sass files
    in addition to style-loader and css-loader we also need to install sass-loader which also
@@ -135,7 +134,7 @@
    > yarn add style-loader css-loader sass-loader node-sass
    > configuration
 
-   ```javascript
+````javascript
    module: {
      rules: [
        {
@@ -147,8 +146,7 @@
          ],
        },
      ];
-   }
-   ```
+   }```
 
 #### working with asset / images loaders
 
@@ -156,22 +154,19 @@
 
    > yarn add html-loader
    > add rule below to webpack module.rules
-
-   ```javascript
+```javascript
    {
        test: /\.html$/,
        use: [
             "html-loader", // this will tell webpack to require any file use in the html
        ],
-   },
-   ```
+   },```
 
 2. we need file-loader
 
    > yarn add file-loader
    > add another rule to webpack module.rules
-
-   ```javascript
+```javascript
     {
        test: /\.(svg|png|jpg|gif|webp)$/, // test
        use: { // object instead of array
@@ -182,7 +177,7 @@
            },
        },
     },
-   ```
+````
 
 ### Plugins
 
@@ -195,16 +190,18 @@
     > 1. install html-webpack-plugin [yarn add html-webpack-plugin]
     > 2. import the plugin with commonjs
 
-    ```javascript
-        const HtmlWebpackPlugin = require("html-webpack-plugin");
+```javascript
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-        //usage
-        {
-            plugins :[new HtmlWebpackPlugin({
-                template : "path to html template" // html template file without the script linked
-            })]
-        }
-    ```
+//usage
+{
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "path to html template", // html template file without the script linked
+    }),
+  ];
+}
+```
 
 #### clean-webpack-plugin
 
@@ -213,14 +210,14 @@
     > note it is used in production
     > we then require it in webpack.prod.js
 
-    ```javascript
-        const CleanWebpackPlugin = require("clean-webpack-plugin");
+```javascript
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 
-        //usage
-        {
-            plugins :[new CleanWebpackPlugin()]
-        }
-    ```
+//usage
+{
+  plugins: [new CleanWebpackPlugin()];
+}
+```
 
 ### configuring webpack to spit out multiple bundle
 
@@ -231,7 +228,7 @@
     > we do this in common
     > we then change output to
 
-    ```javascript
+```javascript
     //common
     {
 
@@ -251,7 +248,7 @@
             path : path.resolve(__dirname, "dist)
         }
     }
-    ```
+```
 
 #### extracting css yarn mini-css-extract-plugin
 
@@ -260,28 +257,30 @@
     > its required in prod
     > its added as a plugin [new M]
 
-    ```javascript
-        const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-        //usage  to extract css file from javascript to a seperate css file
-        //1. as plugin
-        plugins :[new MiniCssExtractPlugin({
-            filename : "[name].[contentHash].css"
-        })]
-        //2. as loader its used instead of style-loader to inject it into html
-        module :{
-            rules :[
-                {
-                    test : /\.css$/,
-                    use :[
-                        MiniCssExtractPlugin.loader,
-                        "css-loader",
-                        // incase of sass user
-                        "sass-loader"
-                    ]
-                }
-            ]
-        }
-    ```
+```javascript
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+//usage  to extract css file from javascript to a seperate css file
+//1. as plugin
+plugins: [
+  new MiniCssExtractPlugin({
+    filename: "[name].[contentHash].css",
+  }),
+];
+//2. as loader its used instead of style-loader to inject it into html
+module: {
+  rules: [
+    {
+      test: /\.css$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        "css-loader",
+        // incase of sass user
+        "sass-loader",
+      ],
+    },
+  ];
+}
+```
 
 #### minimize css-- optimize-css-assets-webpack-plugin
 
@@ -290,17 +289,15 @@
     > done in production
     > we don't use it directly in plugin we use it in optimization.minimizer
 
-    ```javascript
-        const OptimizeCssAssetsPlugin = require("optimize-css-assets-plugin");
-        //usage
-        {
-            optimization : {
-                minimizer : [
-                    new OptimizeCssAssetsPlugin()
-                ]
-            }
-        }
-    ```
+```javascript
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-plugin");
+//usage
+{
+  optimization: {
+    minimizer: [new OptimizeCssAssetsPlugin()];
+  }
+}
+```
 
 ### minimize js file terser-webpack-plugin
 
