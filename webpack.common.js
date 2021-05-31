@@ -7,6 +7,7 @@ module.exports = {
     vendor: "./src/vendor.js",
   },
   module: {
+    // this two rules is for loading files
     rules: [
       {
         test: /\.html$/,

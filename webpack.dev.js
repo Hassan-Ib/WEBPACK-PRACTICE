@@ -32,7 +32,7 @@ module.exports = merge(common, {
 
 // dev server // development server to avoid runing npm start over and over
 // install webpack-dev-server [yarn add webpack-dev-server]
-// package.json file script: start : "webpack-dev-server --config webpack-dev.js --open"
+// package.json file script: start : "webpack server --config webpack-dev.js --open"
 // --open : to open browser tab
 // devserver doesnt need dist folder to run , it runs on memory
 
