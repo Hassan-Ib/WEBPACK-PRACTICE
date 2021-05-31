@@ -1,6 +1,6 @@
 # Webpack installation and Config :octocat:
 
-## installation \[as developer dependecies\] :rocket:
+## installation [as developer dependecies] :rocket:
 
     > initiating node pageage manager \[npm or yarn\]
     > yarn init -y / npm init -y
@@ -18,7 +18,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack"
+    "start": "webpack serve --config webpack-dev.js --open"
   },
   "devDependencies": {
     "webpack": "^5.36.2",
